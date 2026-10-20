@@ -1139,17 +1139,6 @@ const JPH::BodyID* UJoltSubsystem::AddDynamicBodyForExternalOwner(
 	return AddDynamicBodyCollision(bodyID, shape, initialWorldTransform, friction, restitution, mass, layerName);
 }
 
-const JPH::BodyID* UJoltSubsystem::AddDynamicBoxBodyForExternalOwner(
-	const JPH::BodyID& bodyID,
-	const FVector&	   dimensions,
-	const FTransform&  initialWorldTransform,
-	float friction, float restitution, float mass,
-	FName layerName)
-{
-	const JPH::BoxShape* shape = GetBoxCollisionShape(dimensions);
-	return AddDynamicBodyCollision(bodyID, shape, initialWorldTransform, friction, restitution, mass, layerName);
-}
-
 const JPH::BodyID* UJoltSubsystem::AddDynamicBodyCollision(const JPH::Shape* shape, const FTransform& initialWorldTransform, float friction, float restitution, float mass, FName layerName)
 {
 	JPH::BodyCreationSettings shapeSettings(

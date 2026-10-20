@@ -421,15 +421,6 @@ public:
 		float friction, float restitution, float mass,
 		FName layerName = NAME_None);
 
-	// Same as AddDynamicBodyForExternalOwner, with a box shape built inside this module (Jolt statics are per-DLL on Windows,
-	// so callers outside this module must not allocate Jolt shapes themselves). dimensions = full box size in UE units.
-	const JPH::BodyID* AddDynamicBoxBodyForExternalOwner(
-		const JPH::BodyID& bodyID,
-		const FVector&	   dimensions,
-		const FTransform&  initialWorldTransform,
-		float friction, float restitution, float mass,
-		FName layerName = NAME_None);
-
 	// Mirror of AddDynamicBodyForExternalOwner: removes and destroys the body
 	// in Jolt AND drops the BodyIDBodyMap entry.
 	void RemoveBodyForExternalOwner(const JPH::BodyID& bodyID);
@@ -454,9 +445,11 @@ private:
 
 	void RestoreShapeMaterials(const FJoltShapeData& shapeData, const JPH::Ref<JPH::Shape>& loadedShape);
 
+public:
 	const JPH::BoxShape* GetBoxCollisionShape(const FVector& dimensions, const JoltPhysicsMaterial* material = nullptr);
 
 	const JPH::SphereShape* GetSphereCollisionShape(const float& radius, const JoltPhysicsMaterial* material = nullptr);
+private:
 
 	const JPH::CapsuleShape* GetCapsuleCollisionShape(const float& radius, const float& height, const JoltPhysicsMaterial* material = nullptr);
 
@@ -470,7 +463,9 @@ private:
 
 	const JPH::BodyID* AddStaticBodyCollision(const JPH::BodyID& bodyID, const JPH::Shape* shape, const FTransform& initialWorldTransform, float friction, float restitution, FName layerName = NAME_None);
 
+public:
 	const JPH::BodyID* AddKinematicBodyCollision(const JPH::BodyID& bodyID, const JPH::Shape* shape, const FTransform& initialWorldTransform, float friction, float restitution, float mass, FName layerName = NAME_None);
+private:
 
 	const JPH::BodyID* AddKinematicBodyCollision(const JPH::Shape* shape, const FTransform& initialWorldTransform, float friction, float restitution, float mass, FName layerName = NAME_None);
 
